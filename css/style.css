@@ -1,0 +1,91 @@
+body {
+    /* background-color: rgb(204, 161, 146);
+   */
+}
+
+.button-box {
+    display: flex;
+}
+
+.btn {
+    background: rgb(22, 143, 151);
+    color: white;
+    padding: 10px;
+    justify-content: center;
+    margin: 10px;
+
+}
+
+.btn:hover {
+    background: rgb(75, 72, 72);
+}
+
+.chose-size {
+    display: flex;
+}
+
+.size {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+}
+
+.item-size {
+    margin: 5px;
+    text-decoration: underline;
+    text-decoration-color: rgb(22, 143, 151);
+    color: rgb(22, 143, 151);
+}
+
+.item-size:hover {
+    color: blueviolet;
+    text-decoration-color: blueviolet;
+}
+
+.game-block {
+    background: rgba(209, 252, 93, 0.692);
+    display: grid;
+
+}
+
+.grid-three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-four {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-five {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-six {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.grid-seven {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.grid-eight {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.item-block {
+    background: rgb(22, 143, 151);
+    color: white;
+    font-size: 2rem;
+    margin: 2px;
+    text-align: center;
+    padding: 7px;
+    border: 1px solid rgb(22, 143, 151);
+
+}
+
+.empty-block {
+    background: rgba(209, 252, 93, 0.692);
+    margin: 2px;
+    text-align: center;
+    padding: 7px;
+}
