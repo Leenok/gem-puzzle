@@ -2,7 +2,6 @@
 let norm = 3;
 let count = 0;
 
-
 //create arr
 function create_arr(n) {
     count = 0;
@@ -22,8 +21,6 @@ function nrr(arr) {
     return y;
 }
 
-
-
 //write arr in html
 function bloki(x) {
     let z = "";
@@ -38,20 +35,16 @@ function bloki(x) {
             }
         }
     }
-
     return z;
 }
 
-//size \
+//size 
 let sizes = document.querySelectorAll('.item-size');
-console.log(sizes);
-
-
+// choose size
 for (let i = 0; i < sizes.length; i++) {
     sizes[i].addEventListener('click', function () {
-        // console.log(sizes[i].classList[1]);
         norm = sizes[i].classList[1];
-        console.log(norm);
+        // console.log(norm);
     })
 }
 
@@ -80,14 +73,23 @@ function addcl(n) {
         return 'grid-eight';
     }
 }
-
+let win_block = document.createElement('div');
+win_block.classList.add('win');
+win_block.classList.add('block');
 let container = document.createElement('div');
 let counter = document.createElement('div');
+
+document.body.append(win_block);
+document.body.append(counter);
+document.body.append(container);
+
 console.log(norm + " hi switch norm");
 
 starts.addEventListener('click', function (e) {
-    allSeconds = 0;
+    // console.log(document.body);
+    resetTimer();
     startTimer();
+    win_block.classList.add('block');
     count = 0;
     container.className = "game-block";
     container.classList.add(addcl(norm));
@@ -98,12 +100,12 @@ starts.addEventListener('click', function (e) {
     itogger = nrr(itog);
 
     random_arr = nrr(shuffle(itog));
-    container.innerHTML = bloki(random_arr);
-    // counter.innerHTML = "move: " + 0;
 
-    counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`
-    document.body.append(counter);
-    document.body.append(container);
+    container.innerHTML = bloki(random_arr);
+    counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`;
+
+    counter.append();
+    container.append();
 
 })
 
@@ -136,17 +138,18 @@ function moveItem(n, ar) {
 
     container.innerHTML = bloki(ar);
     counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`
-    document.body.append(counter);
-    document.body.append(container);
+    counter.append();
+    container.append();
 
-    //win
+    //
+
     if (ar.join("") == itogger.join("")) {
-        let z = document.createElement('div')
-        z.innerHTML = "YOU WIN!!!!!!";
-        z.className = "win";
-        document.body.append(z);
-        container.classList.add('block');
-        document.body.append(container);
+
+        console.log("Win");
+        stopTimer();
+        win_block.innerHTML = `You win! move: ${count}, time: ${minV}: ${secV}`;
+        win_block.classList.remove("block");
+
     }
     return ar;
 }
@@ -181,13 +184,24 @@ container.addEventListener('click', function (e) {
 let blok_grey = document.createElement('div');
 blok_grey.classList.add("block-grey");
 let btn_stop = document.querySelector('.stop');
+let box_btn = document.querySelector('.button-box');
 
 btn_stop.addEventListener('click', function () {
-    // clearTimeout(timeer);
-    // timer.innerHTML += " stop";
-    // stopTimer();
+    let z = btn_stop.innerHTML;
+    if (z == 'Stop') {
+        pauseTimer(allSeconds);
+        btn_stop.innerHTML = "Run ";
+        btn_stop.append();
+        container.classList.add('block');
+        i = 1;
+    }
+    if (z == "Run ") {
+        startTimer();
+        btn_stop.innerHTML = "Stop";
+        btn_stop.append();
+        container.classList.remove('block');
+    }
 
-    stopTimer();
 })
 
 
@@ -196,40 +210,34 @@ let allSeconds = 0;
 let minV = 0;
 let secV = 0;
 var timerInterval;
+
+
 function startTimer() {
-    stopTimer();
+    // stopTimer();
     timerInterval = setInterval(function () {
         allSeconds += 1;
         minV = Math.floor(allSeconds / 60);
         secV = allSeconds % 60;
         secV = secV < 10 ? "0" + secV.toString() : secV;
         minV = minV < 10 ? "0" + minV.toString() : minV;
-        counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`
+        counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`;
     }, 1000);
 }
-
+function pauseTimer(sec) {
+    allSeconds = sec;
+    stopTimer();
+    // startTimer();
+}
 function stopTimer() {
     clearInterval(timerInterval);
 }
-/*
-str_btn.addEventListener('click', function () {
-    startTimer();
-});
-stop_btn.addEventListener('click', function () {
-    stopTimer();
-})
-/*
-let i = 0;
-function func(i) {
-    timer.innerHTML = "time: " + i;
-}
-let timeer = setTimeout(function run() {
-    func(i);
-    i++;
-    setTimeout(run, 1000)
-}, 1000)
 
-*/
+function resetTimer() {
+    stopTimer();
+    allSeconds = 0;
+    counter.innerHTML = ` Move: ${count}, time: 00: 00`;
+}
+
 
 
 
