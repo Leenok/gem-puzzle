@@ -89,3 +89,15 @@ body {
     text-align: center;
     padding: 7px;
 }
+
+.win {
+    font-size: 3rem;
+    background: rgb(17, 214, 27);
+    color: aliceblue;
+    text-align: center;
+}
+
+.block {
+    background: rgba(0, 0, 0, 0.103);
+    display: none;
+}
