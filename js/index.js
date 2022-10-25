@@ -105,8 +105,7 @@ starts.addEventListener('click', function (e) {
 //MOVE items
 
 function moveItem(n, ar) {
-    z.innerHTML = "";
-    console.log(z.innerHTML);
+
     let razm = ar.length;
     let coord_zer = [];
     let coord_ch = []
