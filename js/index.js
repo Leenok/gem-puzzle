@@ -1,15 +1,28 @@
-
-let norm = 3;
 let count = 0;
-let res = ["win 1, move 1, time 3", "win2", "win 3"];
+let norm = 3;
+let res = ["3*3, move 5, time 02:15", "5*5, move 84, time 09:15"];
+let allSeconds = 0;
+let minV = 0;
+let secV = 0;
+var timerInterval;
+
 //create arr
 function create_arr(n) {
     count = 0;
-    return Array.from(Array(n ** 2).keys());
+    let y = Array.from(Array(n ** 2).keys());
+    y.splice(0, 1);
+    y.push(0);
+    return y;
 }
 //mix arr
 function shuffle(arr) {
-    return arr.sort(() => Math.random() - 0.5)
+    // return arr;
+    let z = arr.sort(() => Math.random() - 0.5);
+    let y = z.indexOf(0);
+    // console.log(y);
+    z[y] = z[z.length - 1];
+    z[z.length - 1] = 0;
+    return z;
 }
 // del na mini arr
 function nrr(arr) {
@@ -44,7 +57,7 @@ let sizes = document.querySelectorAll('.item-size');
 for (let i = 0; i < sizes.length; i++) {
     sizes[i].addEventListener('click', function () {
         norm = sizes[i].classList[1];
-        // console.log(norm);
+        console.log(norm);
     })
 }
 
@@ -81,33 +94,30 @@ let counter = document.createElement('div');
 let size_name = document.createElement('div');
 
 size_name.classList.add('center');
+counter.classList.add('center');
+container.classList.add('game-block');
+container.classList.add('center');
 document.body.append(win_block);
 document.body.append(counter);
 document.body.append(container);
 document.body.append(size_name);
 
-console.log(norm + " hi switch norm");
 
 starts.addEventListener('click', function (e) {
-    // console.log(document.body);
     resetTimer();
     startTimer();
     win_block.classList.add('block');
     count = 0;
-    container.className = "game-block";
-    container.classList.add(addcl(norm));
+    container.classList = "game-block center " + addcl(norm);
+
     itog = create_arr(norm);
-    //itoger
-    itog.splice(0, 1);
-    itog.push(0);
     itogger = nrr(itog);
-
     random_arr = nrr(shuffle(itog));
-
     container.innerHTML = bloki(random_arr);
+    size_name.innerHTML = `Size : ${norm} * ${norm}`;
+
     counter.innerHTML = `Move: ${count}, time: ${minV}: ${secV}`;
 
-    size_name.innerHTML = `Size : ${norm} * ${norm}`
     counter.append();
     container.append();
     size_name.append();
@@ -148,13 +158,13 @@ function moveItem(n, ar) {
     counter.append();
     container.append();
 
-    //
+    //win
 
     if (ar.join("") == itogger.join("")) {
         stopTimer();
-        win_block.innerHTML = `You win! move:${count}, time: ${minV}: ${secV}`;
+        win_block.innerHTML = `Ура! Вы решили головоломку за  ${minV}: ${secV} и ${count} ходов!`;
         win_block.classList.remove("block");
-        res.push(`move:${count}, time: ${minV}: ${secV}`);
+        res.push(`size: ${norm}, move:${count}, time: ${minV}: ${secV}`);
     }
     return ar;
 }
@@ -209,14 +219,6 @@ btn_stop.addEventListener('click', function () {
 
 })
 
-
-//time
-let allSeconds = 0;
-let minV = 0;
-let secV = 0;
-var timerInterval;
-
-
 function startTimer() {
     // stopTimer();
     timerInterval = setInterval(function () {
@@ -264,8 +266,3 @@ function writeResults(arr) {
     }
     return z;
 }
-//music btn
-var musicSpan = document.getElementById('musicSpan');
-musicSpan.addEventListener('click', function () {
-    document.getElementById('sound').play()
-})

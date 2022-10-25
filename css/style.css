@@ -1,10 +1,6 @@
-body {
-    /* background-color: rgb(204, 161, 146);
-   */
-}
-
 .button-box {
     display: flex;
+    justify-content: center;
 }
 
 .btn {
@@ -13,15 +9,10 @@ body {
     padding: 10px;
     justify-content: center;
     margin: 10px;
-
 }
 
 .check-btn {
     background: rgb(75, 72, 72);
-}
-
-.btn::after {
-    background: rgb(24, 223, 41);
 }
 
 .btn:hover {
@@ -30,11 +21,14 @@ body {
 
 .chose-size {
     display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
 }
 
 .size {
     display: flex;
     list-style-type: none;
+    margin: 0;
 }
 
 .item-size {
@@ -45,8 +39,7 @@ body {
 }
 
 .item-size:hover {
-    color: blueviolet;
-    text-decoration-color: blueviolet;
+    background-color: rgba(209, 252, 93, 0.692);
 }
 
 .game-block {
@@ -87,7 +80,6 @@ body {
     text-align: center;
     padding: 7px;
     border: 1px solid rgb(22, 143, 151);
-
 }
 
 .empty-block {
