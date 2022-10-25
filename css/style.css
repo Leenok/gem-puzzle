@@ -16,6 +16,14 @@ body {
 
 }
 
+.check-btn {
+    background: rgb(75, 72, 72);
+}
+
+.btn::after {
+    background: rgb(24, 223, 41);
+}
+
 .btn:hover {
     background: rgb(75, 72, 72);
 }
@@ -27,7 +35,6 @@ body {
 .size {
     display: flex;
     list-style-type: none;
-    margin: 0;
 }
 
 .item-size {
@@ -45,7 +52,7 @@ body {
 .game-block {
     background: rgba(209, 252, 93, 0.692);
     display: grid;
-
+    width: 50%;
 }
 
 .grid-three {
@@ -100,4 +107,10 @@ body {
 .block {
     background: rgba(0, 0, 0, 0.103);
     display: none;
+}
+
+.block-grey {
+    display: none;
+    background: rgba(0, 0, 0, 0.342);
+
 }

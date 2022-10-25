@@ -86,6 +86,8 @@ let counter = document.createElement('div');
 console.log(norm + " hi switch norm");
 
 starts.addEventListener('click', function (e) {
+    allSeconds = 0;
+    startTimer();
     count = 0;
     container.className = "game-block";
     container.classList.add(addcl(norm));
@@ -97,9 +99,12 @@ starts.addEventListener('click', function (e) {
 
     random_arr = nrr(shuffle(itog));
     container.innerHTML = bloki(random_arr);
-    counter.innerHTML = 0;
-    document.body.append(container);
+    // counter.innerHTML = "move: " + 0;
+
+    counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`
     document.body.append(counter);
+    document.body.append(container);
+
 })
 
 //MOVE items
@@ -130,7 +135,7 @@ function moveItem(n, ar) {
     }
 
     container.innerHTML = bloki(ar);
-    counter.innerHTML = count;
+    counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`
     document.body.append(counter);
     document.body.append(container);
 
@@ -172,22 +177,59 @@ container.addEventListener('click', function (e) {
     random_arr = moveItem(ch, random_arr);
 
 })
+//stop
+let blok_grey = document.createElement('div');
+blok_grey.classList.add("block-grey");
+let btn_stop = document.querySelector('.stop');
+
+btn_stop.addEventListener('click', function () {
+    // clearTimeout(timeer);
+    // timer.innerHTML += " stop";
+    // stopTimer();
+
+    stopTimer();
+})
 
 
 //time
-let timer = document.querySelector('.time');
-
-
-
-function Timer() {
-    let elem = document.getElementById('timer');
-    elem.value = +elem.value + 1;
+let allSeconds = 0;
+let minV = 0;
+let secV = 0;
+var timerInterval;
+function startTimer() {
+    stopTimer();
+    timerInterval = setInterval(function () {
+        allSeconds += 1;
+        minV = Math.floor(allSeconds / 60);
+        secV = allSeconds % 60;
+        secV = secV < 10 ? "0" + secV.toString() : secV;
+        minV = minV < 10 ? "0" + minV.toString() : minV;
+        counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`
+    }, 1000);
 }
-function start() {
-    window.TimerId = window.setInterval(Timer, 1000);
+
+function stopTimer() {
+    clearInterval(timerInterval);
 }
-function stop() {
-    window.clearInterval(window.TimerId);
+/*
+str_btn.addEventListener('click', function () {
+    startTimer();
+});
+stop_btn.addEventListener('click', function () {
+    stopTimer();
+})
+/*
+let i = 0;
+function func(i) {
+    timer.innerHTML = "time: " + i;
 }
+let timeer = setTimeout(function run() {
+    func(i);
+    i++;
+    setTimeout(run, 1000)
+}, 1000)
+
+*/
+
 
 
