@@ -1,7 +1,7 @@
 
 let norm = 3;
 let count = 0;
-
+let res = ["win 1, move 1, time 3", "win2", "win 3"];
 //create arr
 function create_arr(n) {
     count = 0;
@@ -78,10 +78,13 @@ win_block.classList.add('win');
 win_block.classList.add('block');
 let container = document.createElement('div');
 let counter = document.createElement('div');
+let size_name = document.createElement('div');
 
+size_name.classList.add('center');
 document.body.append(win_block);
 document.body.append(counter);
 document.body.append(container);
+document.body.append(size_name);
 
 console.log(norm + " hi switch norm");
 
@@ -102,10 +105,12 @@ starts.addEventListener('click', function (e) {
     random_arr = nrr(shuffle(itog));
 
     container.innerHTML = bloki(random_arr);
-    counter.innerHTML = ` Move: ${count}, time: ${minV}: ${secV}`;
+    counter.innerHTML = `Move: ${count}, time: ${minV}: ${secV}`;
 
+    size_name.innerHTML = `Size : ${norm} * ${norm}`
     counter.append();
     container.append();
+    size_name.append();
 
 })
 
@@ -134,6 +139,8 @@ function moveItem(n, ar) {
         ar[coord_ch[0]][coord_ch[1]] = 0;
         ar[coord_zer[0]][coord_zer[1]] = +n;
         count++;
+        document.getElementById('sound').play();
+
     }
 
     container.innerHTML = bloki(ar);
@@ -144,12 +151,10 @@ function moveItem(n, ar) {
     //
 
     if (ar.join("") == itogger.join("")) {
-
-        console.log("Win");
         stopTimer();
-        win_block.innerHTML = `You win! move: ${count}, time: ${minV}: ${secV}`;
+        win_block.innerHTML = `You win! move:${count}, time: ${minV}: ${secV}`;
         win_block.classList.remove("block");
-
+        res.push(`move:${count}, time: ${minV}: ${secV}`);
     }
     return ar;
 }
@@ -238,6 +243,29 @@ function resetTimer() {
     counter.innerHTML = ` Move: ${count}, time: 00: 00`;
 }
 
+//result 
+let btn_result = document.querySelector('.res');
+let block_result = document.createElement('div');
+block_result.classList.add('block');
+document.body.append(block_result);
+
+btn_result.addEventListener('click', function () {
+    block_result.innerHTML = writeResults(res);
+    console.log(writeResults(res));
+    block_result.classList.toggle('block');
+    block_result.append();
+})
 
 
-
+function writeResults(arr) {
+    let z = '';
+    for (let i in arr) {
+        z += `<p>${i}) size ${norm}*${norm}, ${arr[i]}</p>`;
+    }
+    return z;
+}
+//music btn
+var musicSpan = document.getElementById('musicSpan');
+musicSpan.addEventListener('click', function () {
+    document.getElementById('sound').play()
+})
