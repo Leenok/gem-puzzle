@@ -167,15 +167,10 @@ function check(a, z) {
     return '5';
 }
 
-window.addEventListener('click', function (e) {
-    if (e.path[0].className == 'item-block') {
-        console.log(e.path[0].innerHTML);
-        let ch = e.path[0].innerHTML;
-        console.log(random_arr);
-        // console.log(random_arr.indexOf(+ch));
-        // console.log(moveItem(ch, random_arr));
-        random_arr = moveItem(ch, random_arr);
-    }
+container.addEventListener('click', function (e) {
+    let ch = e.target.innerHTML;
+    random_arr = moveItem(ch, random_arr);
+
 })
 
 
