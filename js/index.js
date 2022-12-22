@@ -6,7 +6,7 @@ let minV = 0;
 let secV = 0;
 var timerInterval;
 
-//create arr
+//create ar r  
 function create_arr(n) {
     count = 0;
     let y = Array.from(Array(n ** 2).keys());
